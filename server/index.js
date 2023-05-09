@@ -1,7 +1,6 @@
 require('dotenv').config() //подключение файла .env, оттуда дергаем нашу среду, т.е. константы описывающие порты, имена бд и тд.
 const express = require('express') // подключение express, про него https://expressjs.com/ru/
-const sequelize = require('./database') // подключение файла с инициализацией бд
-const models = require('./models/models.js') // подключение моделей данных
+//const sequelize = require('./database') // подключение файла с инициализацией бд
 const cors = require('cors') // про cors https://habr.com/ru/companies/macloud/articles/553826/
 const router = require('./routes/index') // импорт роутеров, т.е. те штуки, которые описывают адреса, на которые приходят запросы
 const fileUpload = require('express-fileupload')
@@ -20,8 +19,6 @@ app.use('/api', router)
 app.use(errorHandler)// обработка ошибок. Должна идти в самом конце, т.к. это заключающий middleware, на нем прекращается работа и мы отправляем пользоввателю ответ
 const start = async ()=>{ //функция для старта сервака, вызов асинхронной функции для подключение к БД
     try{
-        await sequelize.authenticate()
-        await sequelize.sync()//сверяет состсояние бд со схемой данных
         app.listen(PORT, ()=>console.log(`Server successfully started on port ${PORT}`)) // добавление слушателя для отклика на запуск сервера
     }catch (e){
         console.log(e)

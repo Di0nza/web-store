@@ -1,15 +1,15 @@
-const {Brand, Type} = require('../models/models')
 const ApiError = require('../error/ApiError')
+const db = require("../db");
 class BrandController {
     async create(req, res) {
         const {name} = req.body
-        const  brand = await Brand.create({name})
-        return res.json(brand)
+        const  brand = await db.query('INSERT INTO brands (name) values ($1) returning *', [name])
+        return res.json(brand.rows[0])
     }
 
     async getAll(req, res){
-        const brands = await Brand.findAll()
-        return res.json(brands)
+        const brands = await db.query(`SELECT * FROM brands`)
+        return res.json(brands.rows)
     }
 }
 

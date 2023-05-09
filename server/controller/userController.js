@@ -1,8 +1,8 @@
 const ApiError = require('../error/ApiError')
 const bcrypt = require('bcrypt')// для хеширования пароля
 const jwt = require('jsonwebtoken')
-const {User, Basket} = require('../models/models')
-
+const db = require('../db')
+const {json} = require("express");
 const generateJwt = (id, email, role) => {
     return jwt.sign(
         {id, email, role},
@@ -13,32 +13,38 @@ const generateJwt = (id, email, role) => {
 
 class UserController {
     async registration(req, res, next) {
-        const {email, password, role} = req.body
+        let {email, password, role} = req.body
         if (!email || !password) { //TODO посмотреть нормальную валидацию
             return next(ApiError.badRequest('Некорректный email или пароль!'))
         }
-        const candidate = await User.findOne({where: {email}})
-        if (candidate) {
+        const candidate = await db.query(`SELECT email FROM users WHERE email = $1 LIMIT 1`, [email])
+        console.log(candidate.rows.length)
+        if (candidate.rows.length !== 0) {
             return next(ApiError.badRequest('Пользователь с таким email уже существует'))
         }
+        if (typeof role === "undefined"){
+            role = 'USER'
+        }
         const hashPassword = await bcrypt.hash(password, 3)
-        const user = await User.create({email,  password: hashPassword, role})
-        const basket = await Basket.create({userId: user.id})
-        const token = generateJwt(user.id, user.email, user.role)
+        const newUser = await db.query('INSERT INTO users (email, password, role) values ($1,$2,$3) returning *', [email, hashPassword, role])
+        console.log(newUser.rows[0].id, newUser.rows[0].email, newUser.rows[0].role)
+        const basket = await db.query('INSERT INTO busket (user_id) values ($1) returning id', [newUser.rows[0].id])
+        const token = generateJwt(newUser.rows[0].id, newUser.rows[0].email, newUser.rows[0].role)
         return res.json({token})
     }
 
     async login(req, res, next) {
         const {email, password} = req.body
-        const user = await User.findOne({where: {email}})
-        if (!user){
-            return next(ApiError.badRequest('Такого пользователя не существует!'))
+        const user = await db.query(`SELECT * FROM users WHERE email = $1 LIMIT 1`, [email])
+        console.log(user.rows.length)
+        if (user.rows.length === 0) {
+            return next(ApiError.badRequest('Пользователь с таким email не существует'))
         }
-        let comparePassword = bcrypt.compareSync(password, user.password)
+        let comparePassword = bcrypt.compareSync(password, user.rows[0].password)
         if(!comparePassword){
             return next(ApiError.badRequest('Неверный пароль!'))
         }
-        const token = generateJwt(user.id, user.email, user.role)
+        const token = generateJwt(user.rows[0].id, user.rows[0].email, user.rows[0].role)
         return res.json({token})
     }
 

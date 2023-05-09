@@ -1,15 +1,15 @@
-const {Type} = require('../models/models')
 const ApiError = require('../error/ApiError')
+const db = require("../db");
 class TypeController {
     async create(req, res) {
         const {name} = req.body
-        const  type = await Type.create({name})
-        return res.json(type)
+        const  type = await db.query('INSERT INTO types (name) values ($1) returning *', [name])
+        return res.json(type.rows[0])
     }
 
     async getAll(req, res){
-        const types = await Type.findAll()
-        return res.json(types)
+        const types = await db.query(`SELECT * FROM types`)
+        return res.json(types.rows)
     }
 
 }

@@ -3,7 +3,7 @@ const router = new Router()
 const brandRouter = require('./brandRouter')
 const typeRouter = require('./typeRouter')
 const userRouter = require('./userRouter')
-const productRouter = require('./producrRouter')
+const productRouter = require('./productRouter')
 
 
 
