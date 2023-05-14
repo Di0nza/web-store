@@ -5,12 +5,14 @@ module.exports = function (req, res, next){
     }
     try{
         const token = req.headers.authorization.split(' ')[1]
+        console.log(token)
         if(!token){
             return  res.status(401).json({message: "Токен авторизации истек"})
         }
-        const decoded = jwt.verify(token, process.env.SECRET_KEY)
-        req.user  = decoded
-        next()
+            const decoded = jwt.verify(token, process.env.SECRET_KEY || 'kjhsoihgfuibiu')
+            req.user = decoded
+            next()
+
     }catch(e){
         res.status(401).json({message: "Токен авторизации истек"})
     }

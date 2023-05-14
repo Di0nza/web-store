@@ -6,7 +6,7 @@ const {json} = require("express");
 const generateJwt = (id, email, role) => {
     return jwt.sign(
         {id, email, role},
-        process.env.SECRET_KEY,
+        process.env.SECRET_KEY || 'kjhsoihgfuibiu',
         {expiresIn: '5h'}
     )
 }
@@ -28,8 +28,8 @@ class UserController {
         const hashPassword = await bcrypt.hash(password, 3)
         const newUser = await db.query('INSERT INTO users (email, password, role) values ($1,$2,$3) returning *', [email, hashPassword, role])
         console.log(newUser.rows[0].id, newUser.rows[0].email, newUser.rows[0].role)
-        const basket = await db.query('INSERT INTO busket (user_id) values ($1) returning id', [newUser.rows[0].id])
-        const token = generateJwt(newUser.rows[0].id, newUser.rows[0].email, newUser.rows[0].role)
+        const basket = await db.query('INSERT INTO basket (user_id) values ($1) returning id', [newUser.rows[0].id])
+        const token = generateJwt(newUser.rows[0].id, email, role)
         return res.json({token})
     }
 
@@ -44,15 +44,15 @@ class UserController {
         if(!comparePassword){
             return next(ApiError.badRequest('Неверный пароль!'))
         }
-        const token = generateJwt(user.rows[0].id, user.rows[0].email, user.rows[0].role)
+        const token = generateJwt(user.rows[0].id, email, user.rows[0].role)
         return res.json({token})
     }
 
     async auth(req, res, next) {
-        const token = generateJwt(req.user.id, req.user.password, req.user.role)
+        const token = generateJwt(req.user.id, req.user.email, req.user.role)
+        console.log(req.user.id, req.user.email, req.user.role)
         return res.json({token})
     }
-
 }
 
 module.exports = new UserController()

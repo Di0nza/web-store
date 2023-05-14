@@ -4,6 +4,7 @@ class TypeController {
     async create(req, res) {
         const {name} = req.body
         const  type = await db.query('INSERT INTO types (name) values ($1) returning *', [name])
+        console.log(type.rows[0])
         return res.json(type.rows[0])
     }
 
