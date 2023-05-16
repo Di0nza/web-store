@@ -4,34 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2916c258-7795-43c9-bad1-462790838ff4" name="Changes" comment="new manual queries">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/webStore.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/AppRouter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/BrandBar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/NavBar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/Pages.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/ProductItem.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/ProductList.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/TypeBar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/modals/CreateBrand.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/modals/CreateProduct.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/modals/CreateType.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/http/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/http/productApi.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/http/userApi.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/pages/Admin.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/pages/Auth.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/pages/Basket.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/pages/ProductPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/pages/Shop.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/routes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/store/ProductStore.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/store/UserStore.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/utils/consts.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controller/basketController.js" afterDir="false" />
+    <list default="true" id="2916c258-7795-43c9-bad1-462790838ff4" name="Changes" comment="almost done">
+      <change afterPath="$PROJECT_DIR$/client/src/components/SearchBar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/modals/OrderModal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/modals/PhoneModal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/http/orderApi.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/pages/AdminOrderPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/pages/OrdersPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/controller/orderController.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/server/node_modules/.bin/color-support" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/server/node_modules/.bin/mime.ps1" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/server/node_modules/.bin/mkdirp.cmd" afterDir="false" />
@@ -1238,22 +1218,29 @@
       <change afterPath="$PROJECT_DIR$/server/node_modules/xtend/immutable.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/server/node_modules/yallist/LICENSE" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/server/node_modules/yallist/iterator.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/routes/orderRouter.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.env" beforeDir="false" afterPath="$PROJECT_DIR$/server/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controller/brandController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controller/brandController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/NavBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/NavBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/http/productApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/http/productApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/Admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/Basket.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Basket.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/Shop.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Shop.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/store/ProductStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/ProductStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/store/UserStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/UserStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/utils/consts.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/utils/consts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controller/basketController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controller/basketController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/controller/productController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controller/productController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/controller/typeController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controller/typeController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/controller/userController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controller/userController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/middleware/authMiddleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/middleware/authMiddleware.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/middleware/checkRoleMiddleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/middleware/checkRoleMiddleware.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/modelss.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/server/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/static/386ab22e-b58a-4aec-8db3-bf0219d0fbc2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/static/6c331703-a713-49e3-934a-e2be12d73c2f.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/static/d0c7d133-e4ef-41c9-815a-0005583bd0c9.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/static/ec764bd5-41ed-4d54-94a5-705052e5d00b.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1279,7 +1266,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2Os6tcXXqxxvCIc2yKWmOAHQFvm" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -1287,31 +1274,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Xiaomi/WebstormProjects/webStore/server/controller&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2023.1\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
-    &quot;two.files.diff.last.used.folder&quot;: &quot;C:/Users/Xiaomi/WebstormProjects/webStore/server/controller&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "TODO_SCOPE": "All Places",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Xiaomi/WebstormProjects/webStore/server/controller",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settingsDialog.application.dockerConsole",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2023.1\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "two.files.diff.last.used.folder": "C:/Users/Xiaomi/WebstormProjects/webStore/server/controller",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;ChangesTree.GroupingKeys&quot;: [
-      &quot;directory&quot;
+  "keyToStringList": {
+    "ChangesTree.GroupingKeys": [
+      "directory"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Xiaomi\WebstormProjects\webStore\client" />
@@ -1352,7 +1339,13 @@
       <workItem from="1683915443889" duration="1289000" />
       <workItem from="1683927392996" duration="9688000" />
       <workItem from="1683987132744" duration="15037000" />
-      <workItem from="1684064309813" duration="23637000" />
+      <workItem from="1684064309813" duration="24258000" />
+      <workItem from="1684097558129" duration="598000" />
+      <workItem from="1684100621995" duration="11027000" />
+      <workItem from="1684149667319" duration="2427000" />
+      <workItem from="1684155907458" duration="11872000" />
+      <workItem from="1684168450370" duration="2529000" />
+      <workItem from="1684175325907" duration="25492000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1682712808783</created>
@@ -1403,7 +1396,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683650498224</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="almost done">
+      <created>1684089641202</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1684089641202</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1413,6 +1413,7 @@
     <MESSAGE value="initial commit" />
     <MESSAGE value="commit" />
     <MESSAGE value="new manual queries" />
-    <option name="LAST_COMMIT_MESSAGE" value="new manual queries" />
+    <MESSAGE value="almost done" />
+    <option name="LAST_COMMIT_MESSAGE" value="almost done" />
   </component>
 </project>

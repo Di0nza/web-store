@@ -8,6 +8,7 @@ App {
   color: white;
 }
 
+
 .pagination .page-item.active .page-link {
   background-color: #212529;
   border-color: #212529;

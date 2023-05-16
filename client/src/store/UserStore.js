@@ -5,9 +5,13 @@ export default class UserStore {
         this._isAuth = false
         this._isAdmin = false
         this._productsInBasket = []
+        this._orders = []
+        //this._productsInOrder = []
         this._user = {}
+        this._phone = {}
         makeAutoObservable(this)
     }
+
 
     setIsAuth(bool) {
         this._isAuth = bool
@@ -22,6 +26,16 @@ export default class UserStore {
     }
     setProductsInBasket(productsInBasket){
         this._productsInBasket = productsInBasket
+    }
+
+    // setProductsInOrder(productsInOrder){
+    //     this._productsInOrder = productsInOrder
+    // }
+    setOrders(orders){
+        this._orders = orders
+    }
+    setPhone(phone){
+        this._phone = phone
     }
     get isAuth() {
         return this._isAuth
@@ -39,4 +53,14 @@ export default class UserStore {
         return this._productsInBasket
     }
 
+    get phone(){
+        return this._phone
+    }
+
+    get orders(){
+        return this._orders
+    }
+    // get productsInOrder(){
+    //     return this._productsInOrder
+    // }
 }

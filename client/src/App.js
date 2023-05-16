@@ -10,11 +10,12 @@ import {Spinner} from "react-bootstrap";
 
 
 const App = observer(() => {
-    const {user} = useContext(Context)
+    const {user, product} = useContext(Context)
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         console.log(localStorage.getItem('token'))
+        console.log('search name:'+ product.searchName)
         if (localStorage.getItem('token') !== null) {
             check().then(data => {
                 user.setUser(data.id)
@@ -27,7 +28,7 @@ const App = observer(() => {
                 }
                 console.log('check', user)
             }).finally(() => setLoading(false))
-        }//todo выход с рабочим админом
+        }
     }, [])
 
     if (loading) {

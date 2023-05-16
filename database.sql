@@ -65,3 +65,20 @@ create table basket_product(
     constraint fk_products foreign key (product_id) references "products" (id)
 );
 
+create table orders(
+    id serial primary key,
+    user_id integer not null,
+    constraint fk_users foreign key (user_id) references "users" (id),
+    phone_number varchar(20) not null,
+    price integer not null,
+    status varchar(30) not null,
+    created_at varchar(256) not null
+);
+
+create table order_product(
+    id serial primary key,
+    order_id integer not null,
+    constraint fk_orders foreign key (order_id) references "orders" (id),
+    product_id integer not null,
+    constraint fk_products foreign key (product_id) references "products" (id)
+);

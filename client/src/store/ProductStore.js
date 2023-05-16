@@ -2,6 +2,7 @@ import {makeAutoObservable} from "mobx";
 
 export default class ProductStore {
     constructor() {
+        this._searchName = ''
         this._types = []
         this._brands = []
         this._products = []
@@ -42,6 +43,10 @@ export default class ProductStore {
         this._totalCount = totalCount
     }
 
+    setSearchName(searchName){
+        this._searchName = searchName
+    }
+
     get brands(){
         return this._brands
     }
@@ -68,6 +73,10 @@ export default class ProductStore {
     }
     get limit(){
         return this._limit
+    }
+
+    get searchName(){
+        return this._searchName
     }
 
 

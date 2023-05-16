@@ -38,6 +38,7 @@
       </filter>
     </filter-actions>
     <filter-actions connection-id="c83b0403-3f66-4d62-b761-f55ef9403d69" dataset="public.brands" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="6bf771ae-711a-4d09-be9a-fa3c3b9010f8" dataset="public.orders" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="6bf771ae-711a-4d09-be9a-fa3c3b9010f8" dataset="public.basket_product" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="6bf771ae-711a-4d09-be9a-fa3c3b9010f8" dataset="public.products" active-filter-id="156be3a0-aa79-4fc2-b5ca-330eed6ebdc3">
       <filter id="156be3a0-aa79-4fc2-b5ca-330eed6ebdc3" name="2" temporary="true" custom-name="false" type="basic" join-type="AND">

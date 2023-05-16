@@ -8,7 +8,6 @@ class ProductController {
         try {
             let {name, price, description, brand_id, type_id, info} = req.body
             const {img} = req.files
-            console.log(info)
             let fileName = uuid.v4() + ".jpg"
             await img.mv(path.resolve(__dirname, '..', 'static', fileName)) // перемещаем файл в папку статик
             const product = await db.query(
@@ -28,36 +27,64 @@ class ProductController {
     }
 
     async getAll(req, res) {
-        let {type_id, brand_id, page, limit} = req.query
+        let {type_id, brand_id, page, limit, searchName} = req.query
         let offset = page * limit - limit
         let products
-        let resultCount = await db.query(`SELECT * FROM products`)
-        if (!brand_id && !type_id) {
-            products = await db.query(`SELECT * FROM products 
+        let resultCount
+        if(searchName === '') {
+            if (!brand_id && !type_id) {
+                products = await db.query(`SELECT * FROM products 
                                         OFFSET ($1) 
                                         ROWS LIMIT $2`, [offset, limit])
-
-        } else if (brand_id && !type_id) {
-            products = await db.query(`SELECT * FROM products 
+                resultCount = await db.query(`SELECT * FROM products`)
+            } else if (brand_id && !type_id) {
+                products = await db.query(`SELECT * FROM products 
                                         WHERE brand_id = $1 
                                         OFFSET ($2) 
                                         ROWS LIMIT $3`, [brand_id, offset, limit])
-            resultCount = await db.query(`SELECT * FROM products WHERE brand_id = $1`, [brand_id])
-        } else if (!brand_id && type_id) {
-            products = await db.query(`SELECT * FROM products 
+                resultCount = await db.query(`SELECT * FROM products WHERE brand_id = $1`, [brand_id])
+            } else if (!brand_id && type_id) {
+                products = await db.query(`SELECT * FROM products 
                                         WHERE type_id = $1 
                                         OFFSET ($2) 
                                         ROWS LIMIT $3`, [type_id, offset, limit])
-            resultCount = await db.query(`SELECT * FROM products WHERE type_id = $1`, [type_id])
-        } else if (brand_id && type_id) {
-            products = await db.query(`SELECT * FROM products 
+                resultCount = await db.query(`SELECT * FROM products WHERE type_id = $1`, [type_id])
+            } else if (brand_id && type_id) {
+                products = await db.query(`SELECT * FROM products 
                                         WHERE brand_id = $1 AND type_id = $2 
                                         OFFSET ($3) 
                                         ROWS LIMIT $4`, [brand_id, type_id, offset, limit])
-            resultCount = await db.query(`SELECT * FROM products WHERE brand_id = $1 AND type_id = $2`, [brand_id, type_id])
+                resultCount = await db.query(`SELECT * FROM products WHERE brand_id = $1 AND type_id = $2`, [brand_id, type_id])
+            }
+        }else{
+            if (!brand_id && !type_id) {
+                products = await db.query(`SELECT * FROM products 
+                                        WHERE name ILIKE $1
+                                        OFFSET $2
+                                        ROWS LIMIT $3`, [`%${searchName}%`,offset, limit])
+                resultCount = await db.query(`SELECT * FROM products WHERE name ILIKE $1`, [`%${searchName}%`])
+            } else if (brand_id && !type_id) {
+                products = await db.query(`SELECT * FROM products 
+                                        WHERE name ILIKE $1 AND brand_id = $2
+                                        OFFSET ($3) 
+                                        ROWS LIMIT $4`, [`%${searchName}%`, brand_id, offset, limit])
+                resultCount = await db.query(`SELECT * FROM products WHERE name ILIKE $1 AND brand_id = $2`, [`%${searchName}%`, brand_id])
+            } else if (!brand_id && type_id) {
+                products = await db.query(`SELECT * FROM products 
+                                        WHERE name ILIKE $1 AND type_id = $2 
+                                        OFFSET ($3) 
+                                        ROWS LIMIT $4`, [`%${searchName}%`, type_id, offset, limit])
+                resultCount = await db.query(`SELECT * FROM products WHERE name ILIKE $1 AND type_id = $2`, [`%${searchName}%`, type_id])
+            } else if (brand_id && type_id) {
+                products = await db.query(`SELECT * FROM products 
+                                        WHERE name ILIKE $1 AND brand_id = $2 AND type_id = $3 
+                                        OFFSET ($4) 
+                                        ROWS LIMIT $5`, [`%${searchName}%`, brand_id, type_id, offset, limit])
+                resultCount = await db.query(`SELECT * FROM products WHERE name ILIKE $1 AND brand_id = $2 AND type_id = $3`, [`%${searchName}%`, brand_id, type_id])
+            }
         }
+
         const count = resultCount.rowCount
-        console.log(count)
         return res.json([products.rows, count])
     }
 
@@ -70,7 +97,6 @@ class ProductController {
                                             ON products.id = product_info.product_id 
                                             WHERE products.id = $1 
                                             GROUP BY products.id;`, [id]);
-            console.log(product.rows)
             return res.json(product.rows[0]);
         } catch (error) {
             console.error(error);
